@@ -1,0 +1,177 @@
+{
+  "name": "xstudio-vs",
+  "displayName": "xstudio-vs",
+  "description": "基于xstudio 实现的vscode插件",
+  "publisher": "LittleQueen",
+  "version": "0.0.1",
+  "author": {
+    "name": "Little Queen"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anonymous-qsh/xstudio-vs.git"
+  },
+  "engines": {
+    "vscode": "^1.38.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:javascript"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "XSTUDIO 配置信息",
+      "properties": {
+        "xstudio.redisIp": {
+          "type": "string",
+          "default": "127.0.0.1",
+          "description": "Redis Ip"
+        },
+        "xstudio.redisPort": {
+          "type": "number",
+          "default": 6379,
+          "description": "Redis Port"
+        },
+        "xstudio.redisPassword": {
+          "type": "string",
+          "default": "",
+          "description": "Redis Password"
+        },
+        "xstudio.packageName": {
+          "type": "string",
+          "default": "com.lq.demoapp",
+          "description": "Android Package Name"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "clazz-explorer",
+          "title": "Clazz Explorer",
+          "icon": "media/android.png"
+        }
+      ]
+    },
+    "views": {
+      "clazz-explorer": [
+        {
+          "id": "reflectionClazz",
+          "name": "Reflection Clazz"
+        }
+      ],
+      "explorer": [
+        {
+          "id": "xstudio.toBeInjected",
+          "name": "To be Injected File"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "xstudio.callback",
+        "title": "Run Js Code In Android",
+        "icon": {
+          "light": "resources/light/run.png",
+          "dark": "resources/dark/run.png"
+        }
+      },
+      {
+        "command": "xstudio.inject",
+        "title": "Inject Code to App.",
+        "icon": {
+          "light": "resources/light/injector.png",
+          "dark": "resources/dark/injector.png"
+        }
+      },
+      {
+        "command": "xstudio.refreshEntry",
+        "title": "Refresh",
+        "icon": {
+          "light": "resources/light/refresh.png",
+          "dark": "resources/dark/refresh.png"
+        }
+      },
+      {
+        "command": "extension.searchClazz",
+        "title": "Search Clazz"
+      },
+      {
+        "command": "xstudio.addFileToBeInjection",
+        "title": "将此文件添加到待注入文件列表"
+      },
+      {
+        "command": "xstudio.refreshInjectingFile",
+        "title": "refresh injecting file."
+      },
+      {
+        "command": "xstudio.changePackageName",
+        "title": "Change Package Name"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "xstudio.callback",
+          "group": "navigation",
+          "when": "resourceLangId == javascript"
+        },
+        {
+          "command": "xstudio.inject",
+          "group": "navigation",
+          "when": "resourceLangId == javascript"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "xstudio.refreshEntry",
+          "when": "view == reflectionClazz && resourceLangId == javascript",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "xstudio.addFileToBeInjection",
+          "group": "navigation",
+          "when": "resourceLangId == javascript"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "webpack --mode production",
+    "compile": "tsc -p ./",
+    "watch": "webpack --mode development --watch --info-verbosity verbose",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^10.12.21",
+    "@types/rx": "^4.1.1",
+    "@types/sqlite3": "^3.1.5",
+    "sqlite3": "^4.0.6",
+    "ts-loader": "^6.1.0",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.1",
+    "vscode": "^1.1.28",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "dependencies": {
+    "@types/node-rsa": "^1.0.0",
+    "@types/redis": "^2.8.13",
+    "@types/uuid": "^3.4.5",
+    "clipboardy": "^2.1.0",
+    "csv-parser": "^2.3.0",
+    "hiredis": "^0.5.0",
+    "node-rsa": "^1.0.5",
+    "redis": "^2.8.0",
+    "rxjs": "^6.5.3",
+    "uuid": "^3.3.3"
+  }
+}

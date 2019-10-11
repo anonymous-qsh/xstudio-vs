@@ -72,7 +72,7 @@ export function getSqliteBinariesPath(extensionPath: string): string {
             }
             break;
         case 'darwin':
-            sqliteBin = 'sqlite-v3.26.0-osx-x86';
+            sqliteBin = 'sqlite-v3.33.0-osx-x86';
             break;
         default:
             console.log(`Fallback binary not found: system OS not recognized.`);
